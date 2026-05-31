@@ -5,7 +5,7 @@ Submitted for **Reward Category 2: Ace Data Cloud Usage (x402 Facilitator)**
 ---
 
 ### Quick Links
-* 🎥 **[Live Walkthrough Video](PASTE_YOUR_RECORDED_VIDEO_LINK_HERE)**
+* 🎥 **[Live Walkthrough Video](https://www.loom.com/share/02aa1fc373d8477aaa11b90fd206b303)**
 * 💻 **[GitHub Repository](https://github.com/binismail/solana-newsroom-agent)**
 * 🔑 **Agent Public Wallet:** `CN5KEkSrn89TW79uuPvkgnUYRDTZNHNJ4j2rmwhGWsBR`
 
