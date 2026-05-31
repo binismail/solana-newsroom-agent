@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+*.log
+!logs/
+!logs/*.log
+.DS_Store
+agent-keypair.json
+dev-wallet.json
+scratch/

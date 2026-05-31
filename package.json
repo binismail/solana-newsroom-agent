@@ -1,0 +1,35 @@
+{
+  "name": "solana-newsroom-agent",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/agent.js",
+    "generate-wallet": "node dist/generateDevWallet.js",
+    "test": "node dist/mock_test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "overrides": {
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@acedatacloud/sdk": "^2026.504.2",
+    "@acedatacloud/x402-client": "^2026.507.2",
+    "@oobe-protocol-labs/synapse-client-sdk": "^2.0.6",
+    "@oobe-protocol-labs/synapse-sap-sdk": "^0.18.0",
+    "@solana/web3.js": "^1.98.4",
+    "axios": "^1.16.1",
+    "bs58": "^6.0.0",
+    "dotenv": "^17.4.2",
+    "uuid": "^9.0.0"
+  }
+}
