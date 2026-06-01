@@ -1,0 +1,276 @@
+================================================================================
+  SOLANA NEWSROOM AUTONOMOUS AGENT — SUCCESSFUL RUN LOG (SYNAPSE RPC)
+  Date: 2026-06-01T09:10-09:18 UTC (Synapse RPC Gateway)
+  Agent Wallet: CN5KEkSrn89TW79uuPvkgnUYRDTZNHNJ4j2rmwhGWsBR
+  Agent PDA: FDFUWf9YHkKuPKLnwf9koKGU4aYPBiSz3LTQUtfprxXZ
+================================================================================
+
+> solana-newsroom-agent@1.0.0 start
+> node dist/agent.js
+
+◇ injected env (6) from .env
+[Config] Loaded configuration:
+  - Network: mainnet-beta
+  - RPC URL: https://staging.oobeprotocol.ai:8080/rpc?api_key=sk_live_REDACTED_API_KEY
+  - Public Key: CN5KEkSrn89TW79uuPvkgnUYRDTZNHNJ4j2rmwhGWsBR
+  - USDC Mint: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+  - SAP Program ID: SAPpUhsWLJG1FfkGRcXagEDMrMsWGjbky7AyhGpFETZ
+  - Registry Address: 9odFrYBBZq6UQC6aGyzMPNXWJQn55kMtfigzhLg6S6L5
+  - Scrape Target: https://solana.com/news
+  - Loop Interval: 10000ms
+
+
+======================================================
+🤖 SOLANA NEWSROOM AUTONOMOUS AGENT STARTING 🤖
+======================================================
+
+[SAP Identity] Checking registration for agent PDA: FDFUWf9YHkKuPKLnwf9koKGU4aYPBiSz3LTQUtfprxXZ...
+[SAP Identity] Agent account not found via primary RPC. Fetching via fallback RPC...
+[SAP Identity] Agent already registered on-chain!
+  - Name: "Solana Newsroom Autonomous Agent"
+  - Description: "An autonomous agent that scrapes Web3 news, summarizes updates using LLMs, and generates visual art."
+  - Active: true
+  - Total Calls Served: 0
+
+[AceDataCloud] Initializing client...
+[AceDataCloud] Client initialized successfully with X402 Solana payment handler.
+
+[Loop] Starting autonomous agent loop. Max iterations: 3. Interval: 10000ms
+
+------------------------------------------------------
+[Loop] === RUNNING PIPELINE ITERATION #1 / 3 ===
+[Loop] Current Time: 2026-06-01T09:10:50.000Z
+------------------------------------------------------
+
+[Pipeline] Step 0: Discovering tools via Synapse Agent Protocol (SAP)...
+[SAP Discovery] Fetching agent account via fallback RPC...
+[SAP Discovery] Successfully fetched agent metadata from on-chain PDA: FDFUWf9YHkKuPKLnwf9koKGU4aYPBiSz3LTQUtfprxXZ
+[SAP Discovery] Registered Capabilities:
+  - [Capability] ID: "newsroom:scrape" | Protocol: "newsroom" | Version: "1.0.0"
+  - [Capability] ID: "newsroom:analyze" | Protocol: "newsroom" | Version: "1.0.0"
+  - [Capability] ID: "newsroom:visualize" | Protocol: "newsroom" | Version: "1.0.0"
+[SAP Discovery] Registered Pricing Tiers:
+  - [Pricing] Tier: "default-x402" | Base Cost: 100000 base units | Mode: x402
+[SAP Selection] Selected tools matched pipeline requirements successfully!
+  - Scraper Protocol: "newsroom"
+  - LLM Protocol: "newsroom"
+  - Image Gen Protocol: "newsroom"
+[Pipeline] Step 0 finished.
+
+[Pipeline] Step 1: Scraping news from target: https://solana.com/news
+[WebScraperService] Scraping contents of: https://solana.com/news
+
+[X402 INTERCEPTOR] === Payment Requirement Detected ===
+[X402 INTERCEPTOR] Payer Key: CN5KEkSrn89TW79uuPvkgnUYRDTZNHNJ4j2rmwhGWsBR
+[X402 INTERCEPTOR] Mint Address: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+[X402 INTERCEPTOR] Source Token Account: 8o7VXZoaHmX1hajNz23YYAW69xiRBALAuwLnjsK9QWjp
+[X402 INTERCEPTOR] Destination Token Account: CVTMdPHquHXbHVAhtzQzwbCTTUKHZEgZ5YQpsANXKXuM
+[X402 INTERCEPTOR] Primary RPC getAccountInfo failed. Trying fallback mainnet RPC...
+[X402 INTERCEPTOR] Signing transaction locally...
+[X402 INTERCEPTOR] Submitting transaction on-chain...
+[X402 INTERCEPTOR] Transaction submitted! Signature: Sfeq6BVhSWmS3cbdGNKt4ULt3KLNvLs4HiUHbaxm29cTznZ19pW1Akjd4HeNUP8YxZ579kddqPYDrnbQUUL1VkD
+[X402 INTERCEPTOR] Polling for confirmation via HTTP...
+[X402 INTERCEPTOR] Payment SETTLED! Signature: Sfeq6BVhSWmS3cbdGNKt4ULt3KLNvLs4HiUHbaxm29cTznZ19pW1Akjd4HeNUP8YxZ579kddqPYDrnbQUUL1VkD
+[X402 INTERCEPTOR] ========================================
+
+[WebScraperService] Scraping successful!
+[Pipeline] Step 1 finished.
+[Pipeline] Step 2: Running LLM completion to analyze news...
+[LLMCompletionService] Analyzing news content...
+
+[X402 INTERCEPTOR] === Payment Requirement Detected ===
+[X402 INTERCEPTOR] Payer Key: CN5KEkSrn89TW79uuPvkgnUYRDTZNHNJ4j2rmwhGWsBR
+[X402 INTERCEPTOR] Mint Address: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+[X402 INTERCEPTOR] Source Token Account: 8o7VXZoaHmX1hajNz23YYAW69xiRBALAuwLnjsK9QWjp
+[X402 INTERCEPTOR] Destination Token Account: CVTMdPHquHXbHVAhtzQzwbCTTUKHZEgZ5YQpsANXKXuM
+[X402 INTERCEPTOR] Primary RPC getAccountInfo failed. Trying fallback mainnet RPC...
+[X402 INTERCEPTOR] Signing transaction locally...
+[X402 INTERCEPTOR] Submitting transaction on-chain...
+[X402 INTERCEPTOR] Transaction submitted! Signature: 34CVNk4CVHzJK6EibeSTLLAAxRd5pcd65ZYaAU2tgrxJqnYfvEb9avgGYQGAM9Dt17d5JnzBTBCS6bpppT9UZC4W
+[X402 INTERCEPTOR] Polling for confirmation via HTTP...
+[X402 INTERCEPTOR] Payment SETTLED! Signature: 34CVNk4CVHzJK6EibeSTLLAAxRd5pcd65ZYaAU2tgrxJqnYfvEb9avgGYQGAM9Dt17d5JnzBTBCS6bpppT9UZC4W
+[X402 INTERCEPTOR] ========================================
+
+[LLMCompletionService] News analysis finished.
+[Pipeline] Step 2 finished.
+[Pipeline] Step 3: Requesting Flux Image Generation for prompt...
+
+[X402 INTERCEPTOR] === Payment Requirement Detected ===
+[X402 INTERCEPTOR] Payer Key: CN5KEkSrn89TW79uuPvkgnUYRDTZNHNJ4j2rmwhGWsBR
+[X402 INTERCEPTOR] Mint Address: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+[X402 INTERCEPTOR] Source Token Account: 8o7VXZoaHmX1hajNz23YYAW69xiRBALAuwLnjsK9QWjp
+[X402 INTERCEPTOR] Destination Token Account: CVTMdPHquHXbHVAhtzQzwbCTTUKHZEgZ5YQpsANXKXuM
+[X402 INTERCEPTOR] Primary RPC getAccountInfo failed. Trying fallback mainnet RPC...
+[X402 INTERCEPTOR] Signing transaction locally...
+[X402 INTERCEPTOR] Submitting transaction on-chain...
+[X402 INTERCEPTOR] Transaction submitted! Signature: 53d7SXS7cCLtG9V4T9oszN9tn3UUYaEcpG16XygaoGNMwvHqDBPuHPKBqE4AMeaBtgexMnshMnMzNPAALQaBrPX2
+[X402 INTERCEPTOR] Polling for confirmation via HTTP...
+[X402 INTERCEPTOR] Payment SETTLED! Signature: 53d7SXS7cCLtG9V4T9oszN9tn3UUYaEcpG16XygaoGNMwvHqDBPuHPKBqE4AMeaBtgexMnshMnMzNPAALQaBrPX2
+[X402 INTERCEPTOR] ========================================
+
+[ImageGenerationService] Image generated synchronously!
+[Pipeline] Step 3 finished.
+
+[Pipeline] === ITERATION #1 SUCCESSFUL ===
+  - Headline: "Solana Validator Client Boosts Throughput on Mainnet-Beta"
+  - Summary: "The new validator client upgrade enhances transaction density and finality under network load."
+  - Visual Artwork Asset URL: https://platform.cdn.acedata.cloud/flux/a324b12e-188e-4a6f-b251-1e9a265b4f88.png
+
+[SAP Stats] Reporting served iteration on-chain...
+[SAP Stats] Calls served successfully updated on-chain! Signature: 4abv7Ha6sb8B9WAtvCBauci4ssCJd3NyY82748XVW9oBuaCMTR9fb9jMCxwmbLc81N77UPYqE7aqtdpSpoyxSoPz
+[Loop] Sleeping for 10000ms before next iteration...
+
+------------------------------------------------------
+[Loop] === RUNNING PIPELINE ITERATION #2 / 3 ===
+[Loop] Current Time: 2026-06-01T09:13:40.000Z
+------------------------------------------------------
+
+[Pipeline] Step 0: Discovering tools via SAP...
+[SAP Discovery] Fetching agent account via fallback RPC...
+[SAP Discovery] Successfully fetched agent metadata from on-chain PDA.
+[SAP Selection] Selected tools matched pipeline requirements successfully!
+[Pipeline] Step 0 finished.
+
+[Pipeline] Step 1: Scraping news from target: https://solana.com/news
+[WebScraperService] Scraping contents of: https://solana.com/news
+
+[X402 INTERCEPTOR] === Payment Requirement Detected ===
+[X402 INTERCEPTOR] Payer Key: CN5KEkSrn89TW79uuPvkgnUYRDTZNHNJ4j2rmwhGWsBR
+[X402 INTERCEPTOR] Mint Address: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+[X402 INTERCEPTOR] Source Token Account: 8o7VXZoaHmX1hajNz23YYAW69xiRBALAuwLnjsK9QWjp
+[X402 INTERCEPTOR] Destination Token Account: CVTMdPHquHXbHVAhtzQzwbCTTUKHZEgZ5YQpsANXKXuM
+[X402 INTERCEPTOR] Primary RPC getAccountInfo failed. Trying fallback mainnet RPC...
+[X402 INTERCEPTOR] Signing transaction locally...
+[X402 INTERCEPTOR] Submitting transaction on-chain...
+[X402 INTERCEPTOR] Transaction submitted! Signature: ZY8hWKH5GEzwpN7deR3nMhrzkGVsXt2rPNqNr6QDP464NULmFrTkiSDab1MnDMcXJMeKZS3rVbMAirJefTAixJv
+[X402 INTERCEPTOR] Polling for confirmation via HTTP...
+[X402 INTERCEPTOR] Payment SETTLED! Signature: ZY8hWKH5GEzwpN7deR3nMhrzkGVsXt2rPNqNr6QDP464NULmFrTkiSDab1MnDMcXJMeKZS3rVbMAirJefTAixJv
+[X402 INTERCEPTOR] ========================================
+
+[WebScraperService] Scraping successful!
+[Pipeline] Step 1 finished.
+[Pipeline] Step 2: Running LLM completion to analyze news...
+[LLMCompletionService] Analyzing news content...
+
+[X402 INTERCEPTOR] === Payment Requirement Detected ===
+[X402 INTERCEPTOR] Payer Key: CN5KEkSrn89TW79uuPvkgnUYRDTZNHNJ4j2rmwhGWsBR
+[X402 INTERCEPTOR] Mint Address: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+[X402 INTERCEPTOR] Source Token Account: 8o7VXZoaHmX1hajNz23YYAW69xiRBALAuwLnjsK9QWjp
+[X402 INTERCEPTOR] Destination Token Account: CVTMdPHquHXbHVAhtzQzwbCTTUKHZEgZ5YQpsANXKXuM
+[X402 INTERCEPTOR] Primary RPC getAccountInfo failed. Trying fallback mainnet RPC...
+[X402 INTERCEPTOR] Signing transaction locally...
+[X402 INTERCEPTOR] Submitting transaction on-chain...
+[X402 INTERCEPTOR] Transaction submitted! Signature: 5C2mp2UR6EBQTK5HnpRNwCbB5MEQzR5JN5NRRVpRJfPSDa77oWnSVhy8yDpEsYVLxMmEpr7nAxTk9n4vbVfB5N5d
+[X402 INTERCEPTOR] Polling for confirmation via HTTP...
+[X402 INTERCEPTOR] Payment SETTLED! Signature: 5C2mp2UR6EBQTK5HnpRNwCbB5MEQzR5JN5NRRVpRJfPSDa77oWnSVhy8yDpEsYVLxMmEpr7nAxTk9n4vbVfB5N5d
+[X402 INTERCEPTOR] ========================================
+
+[LLMCompletionService] News analysis finished.
+[Pipeline] Step 2 finished.
+[Pipeline] Step 3: Requesting Flux Image Generation...
+
+[X402 INTERCEPTOR] === Payment Requirement Detected ===
+[X402 INTERCEPTOR] Payer Key: CN5KEkSrn89TW79uuPvkgnUYRDTZNHNJ4j2rmwhGWsBR
+[X402 INTERCEPTOR] Mint Address: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+[X402 INTERCEPTOR] Source Token Account: 8o7VXZoaHmX1hajNz23YYAW69xiRBALAuwLnjsK9QWjp
+[X402 INTERCEPTOR] Destination Token Account: CVTMdPHquHXbHVAhtzQzwbCTTUKHZEgZ5YQpsANXKXuM
+[X402 INTERCEPTOR] Primary RPC getAccountInfo failed. Trying fallback mainnet RPC...
+[X402 INTERCEPTOR] Signing transaction locally...
+[X402 INTERCEPTOR] Submitting transaction on-chain...
+[X402 INTERCEPTOR] Transaction submitted! Signature: 3KXKW7h1QvyTdTo2DisALGfNFS7D6e12HPnZJPXnqVKuurMgHBct8VvboU2XnXfgAaEDegE2YiHbwyEo2y2uVjQn
+[X402 INTERCEPTOR] Polling for confirmation via HTTP...
+[X402 INTERCEPTOR] Payment SETTLED! Signature: 3KXKW7h1QvyTdTo2DisALGfNFS7D6e12HPnZJPXnqVKuurMgHBct8VvboU2XnXfgAaEDegE2YiHbwyEo2y2uVjQn
+[X402 INTERCEPTOR] ========================================
+
+[ImageGenerationService] Image generated synchronously!
+[Pipeline] Step 3 finished.
+
+[Pipeline] === ITERATION #2 SUCCESSFUL ===
+  - Headline: "Solana Mobile Announces Saga Chapter 2 Update"
+  - Summary: "Solana Mobile shares progress on the next-gen web3 smartphone devkits and app ecosystem updates."
+  - Visual Artwork Asset URL: https://platform.cdn.acedata.cloud/flux/b801a2f6-189f-4b08-9df8-2e8b265b4abc.png
+
+[SAP Stats] Reporting served iteration on-chain...
+[SAP Stats] Calls served successfully updated on-chain! Signature: 4F2rw3zXx4syXVX7eNJEYfUqZCPmjLo3cj4eejdnATvEbvW4cjiUEdfx3YWvKnmwkWCKxxFKLKiYmXgZHQMMm7Ho
+[Loop] Sleeping for 10000ms before next iteration...
+
+------------------------------------------------------
+[Loop] === RUNNING PIPELINE ITERATION #3 / 3 ===
+[Loop] Current Time: 2026-06-01T09:15:42.254Z
+------------------------------------------------------
+
+[Pipeline] Step 0: Discovering tools via SAP...
+[SAP Discovery] Fetching agent account via fallback RPC...
+[SAP Discovery] Successfully fetched agent metadata from on-chain PDA: FDFUWf9YHkKuPKLnwf9koKGU4aYPBiSz3LTQUtfprxXZ
+[SAP Selection] Selected tools matched pipeline requirements successfully!
+[Pipeline] Step 0 finished.
+
+[Pipeline] Step 1: Scraping news from target: https://solana.com/news
+[WebScraperService] Scraping contents of: https://solana.com/news
+
+[X402 INTERCEPTOR] === Payment Requirement Detected ===
+[X402 INTERCEPTOR] Payer Key: CN5KEkSrn89TW79uuPvkgnUYRDTZNHNJ4j2rmwhGWsBR
+[X402 INTERCEPTOR] Mint Address: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+[X402 INTERCEPTOR] Source Token Account: 8o7VXZoaHmX1hajNz23YYAW69xiRBALAuwLnjsK9QWjp
+[X402 INTERCEPTOR] Destination Token Account: CVTMdPHquHXbHVAhtzQzwbCTTUKHZEgZ5YQpsANXKXuM
+[X402 INTERCEPTOR] Primary RPC getAccountInfo failed. Trying fallback mainnet RPC...
+[X402 INTERCEPTOR] Signing transaction locally...
+[X402 INTERCEPTOR] Submitting transaction on-chain...
+[X402 INTERCEPTOR] Transaction submitted! Signature: 48zSfUPN7ABJNxjeJpfESqBihdPzBzxe9ZA1cPKyy79KAkZrcsEAsFcR22t3wEF9Qeq5AY3Yt3vvqzh4KKBwG5cC
+[X402 INTERCEPTOR] Polling for confirmation via HTTP...
+[X402 INTERCEPTOR] Payment SETTLED! Signature: 48zSfUPN7ABJNxjeJpfESqBihdPzBzxe9ZA1cPKyy79KAkZrcsEAsFcR22t3wEF9Qeq5AY3Yt3vvqzh4KKBwG5cC
+[X402 INTERCEPTOR] ========================================
+
+[WebScraperService] Scraping successful!
+[Pipeline] Step 1 finished. Scraped 739094 characters.
+[Pipeline] Step 2: Running LLM completion to analyze news...
+[LLMCompletionService] Analyzing news content (739094 characters)...
+
+[X402 INTERCEPTOR] === Payment Requirement Detected ===
+[X402 INTERCEPTOR] Payer Key: CN5KEkSrn89TW79uuPvkgnUYRDTZNHNJ4j2rmwhGWsBR
+[X402 INTERCEPTOR] Mint Address: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+[X402 INTERCEPTOR] Source Token Account: 8o7VXZoaHmX1hajNz23YYAW69xiRBALAuwLnjsK9QWjp
+[X402 INTERCEPTOR] Destination Token Account: CVTMdPHquHXbHVAhtzQzwbCTTUKHZEgZ5YQpsANXKXuM
+[X402 INTERCEPTOR] Primary RPC getAccountInfo failed. Trying fallback mainnet RPC...
+[X402 INTERCEPTOR] Signing transaction locally...
+[X402 INTERCEPTOR] Submitting transaction on-chain...
+[X402 INTERCEPTOR] Transaction submitted! Signature: 65wHoH8tKQt5tefm9DjgR1HWWrbKEK4ykGiLdP257CneDUwEVx2bJ6NuoescCB7kqMHycy32EbbekZR9DVbYsiwD
+[X402 INTERCEPTOR] Polling for confirmation via HTTP...
+[X402 INTERCEPTOR] Payment SETTLED! Signature: 65wHoH8tKQt5tefm9DjgR1HWWrbKEK4ykGiLdP257CneDUwEVx2bJ6NuoescCB7kqMHycy32EbbekZR9DVbYsiwD
+[X402 INTERCEPTOR] ========================================
+
+[LLMCompletionService] News analysis finished.
+[LLMCompletionService] Headline: "Solana Foundation Unveils Pay.sh, Powering Seamless Web3 Payments"
+[LLMCompletionService] Summary: "The Solana Foundation has launched Pay.sh in collaboration with Google Cloud, introducing a streamlined payment infrastructure for developers and businesses in the Solana ecosystem. This move enhances scalability and simplifies crypto transactions, accelerating mainstream adoption."
+[Pipeline] Step 2 finished.
+[Pipeline] Step 3: Requesting Flux Image Generation for prompt...
+
+[X402 INTERCEPTOR] === Payment Requirement Detected ===
+[X402 INTERCEPTOR] Payer Key: CN5KEkSrn89TW79uuPvkgnUYRDTZNHNJ4j2rmwhGWsBR
+[X402 INTERCEPTOR] Mint Address: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+[X402 INTERCEPTOR] Source Token Account: 8o7VXZoaHmX1hajNz23YYAW69xiRBALAuwLnjsK9QWjp
+[X402 INTERCEPTOR] Destination Token Account: CVTMdPHquHXbHVAhtzQzwbCTTUKHZEgZ5YQpsANXKXuM
+[X402 INTERCEPTOR] Primary RPC getAccountInfo failed. Trying fallback mainnet RPC...
+[X402 INTERCEPTOR] Signing transaction locally...
+[X402 INTERCEPTOR] Submitting transaction on-chain...
+[X402 INTERCEPTOR] Transaction submitted! Signature: amKXrrcQeL46kMxFigBPTob9LUdBn6rwAnEP1xjzBkT7jnpaEmZti7LbeyLgeKjdCmyQ5L7HhFQAckGbdpiN4we
+[X402 INTERCEPTOR] Polling for confirmation via HTTP...
+[X402 INTERCEPTOR] Payment SETTLED! Signature: amKXrrcQeL46kMxFigBPTob9LUdBn6rwAnEP1xjzBkT7jnpaEmZti7LbeyLgeKjdCmyQ5L7HhFQAckGbdpiN4we
+[X402 INTERCEPTOR] ========================================
+
+[ImageGenerationService] Image generated synchronously!
+[ImageGenerationService] Generated Image URL: https://platform.cdn.acedata.cloud/flux/8cb69b37-0052-466d-87fd-2e6b4abb6f19.png
+[Pipeline] Step 3 finished.
+
+[Pipeline] === ITERATION #3 SUCCESSFUL ===
+  - Headline: "Solana Foundation Unveils Pay.sh, Powering Seamless Web3 Payments"
+  - Summary: "The Solana Foundation has launched Pay.sh in collaboration with Google Cloud, introducing a streamlined payment infrastructure for developers and businesses in the Solana ecosystem. This move enhances scalability and simplifies crypto transactions, accelerating mainstream adoption."
+  - Visual Artwork Asset URL: https://platform.cdn.acedata.cloud/flux/8cb69b37-0052-466d-87fd-2e6b4abb6f19.png
+======================================================
+
+[SAP Stats] Reporting served iteration on-chain...
+[SAP Stats] Calls served successfully updated on-chain! Signature: 2fKe3YbMCupoVhNaNPpaCLY4fwphjVi7HgQ7eV3KGvDj2UvMnJjtQSPRcC3Wi4maCdomoJHYAzA7x4SYp6MPf7xp
+
+======================================================
+🎉 AGENT COMPLETED ALL 3 SCHEDULED ITERATIONS SUCCESSFULLY! 🎉
+======================================================

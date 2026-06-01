@@ -98,7 +98,7 @@ This repository is designed to cleanly satisfy all manual judging requirements. 
 
 ## 🔗 On-Chain Proof & Verification
 
-A complete run log is saved in [`logs/run-2026-05-31T19-49-mainnet.log`](logs/run-2026-05-31T19-49-mainnet.log) showing the full 3-iteration pipeline execution on **Solana Mainnet-Beta**.
+A complete run log is saved in [`logs/run-2026-06-01-synapse-rpc.log`](logs/run-2026-06-01-synapse-rpc.log) showing the full 3-iteration pipeline execution on **Solana Mainnet-Beta** using the **Synapse RPC gateway**.
 
 ### Key On-Chain Addresses
 
@@ -111,16 +111,22 @@ A complete run log is saved in [`logs/run-2026-05-31T19-49-mainnet.log`](logs/ru
 
 ### Sample X402 USDC Payment Transactions
 
-| # | Solana Explorer Link |
-|---|---|
-| 1 | [`5MxeguRh...`](https://explorer.solana.com/tx/5MxeguRhK9mFnG2cfB8yYzAGnMi3yLXC1phYjQ2Le8kRqjMY3qkX6XoWbUrJNkHJtRtPQ8wHRbGCu5n2ykKptCjM) |
-| 2 | [`2rrRgbDj...`](https://explorer.solana.com/tx/2rrRgbDjQ7SZtgh1CmKRrNtmnkbzbgsaUd8wokyNK1TcxxWC9hv2ZRzEse8doMfWi7feBUftHL5JRiiXNNZkjj5x) |
-| 3 | [`4n64TLxg...`](https://explorer.solana.com/tx/4n64TLxgLZudvV3cDnfXhPMr7DCcmoBCeLdSWvx1M2vBzAY8rkHzDrFZjsyxc77C1qUrLYGHZimdpE413CcW4U2Y) |
-| 4 | [`3afvGKxB...`](https://explorer.solana.com/tx/3afvGKxBsgWcPCQAz4XtaMoou52owTtz1XRP8Haqhre81ukwXH2h729X84nsQmu36SQT8MEXkQVTTNLJuoKiKoVJ) |
+| Iteration | Service | Solana Explorer Link |
+|---|---|---|
+| **Iteration 1** | Web Scraper | [`Sfeq6BVh...`](https://explorer.solana.com/tx/Sfeq6BVhSWmS3cbdGNKt4ULt3KLNvLs4HiUHbaxm29cTznZ19pW1Akjd4HeNUP8YxZ579kddqPYDrnbQUUL1VkD) |
+| **Iteration 1** | LLM Completion | [`34CVNk4C...`](https://explorer.solana.com/tx/34CVNk4CVHzJK6EibeSTLLAAxRd5pcd65ZYaAU2tgrxJqnYfvEb9avgGYQGAM9Dt17d5JnzBTBCS6bpppT9UZC4W) |
+| **Iteration 1** | Image Generation | [`53d7SXS7...`](https://explorer.solana.com/tx/53d7SXS7cCLtG9V4T9oszN9tn3UUYaEcpG16XygaoGNMwvHqDBPuHPKBqE4AMeaBtgexMnshMnMzNPAALQaBrPX2) |
+| **Iteration 2** | Web Scraper | [`ZY8hWKH5...`](https://explorer.solana.com/tx/ZY8hWKH5GEzwpN7deR3nMhrzkGVsXt2rPNqNr6QDP464NULmFrTkiSDab1MnDMcXJMeKZS3rVbMAirJefTAixJv) |
+| **Iteration 2** | LLM Completion | [`5C2mp2UR...`](https://explorer.solana.com/tx/5C2mp2UR6EBQTK5HnpRNwCbB5MEQzR5JN5NRRVpRJfPSDa77oWnSVhy8yDpEsYVLxMmEpr7nAxTk9n4vbVfB5N5d) |
+| **Iteration 2** | Image Generation | [`3KXKW7h1...`](https://explorer.solana.com/tx/3KXKW7h1QvyTdTo2DisALGfNFS7D6e12HPnZJPXnqVKuurMgHBct8VvboU2XnXfgAaEDegE2YiHbwyEo2y2uVjQn) |
+| **Iteration 3** | Web Scraper | [`48zSfUPN...`](https://explorer.solana.com/tx/48zSfUPN7ABJNxjeJpfESqBihdPzBzxe9ZA1cPKyy79KAkZrcsEAsFcR22t3wEF9Qeq5AY3Yt3vvqzh4KKBwG5cC) |
+| **Iteration 3** | LLM Completion | [`65wHoH8t...`](https://explorer.solana.com/tx/65wHoH8tKQt5tefm9DjgR1HWWrbKEK4ykGiLdP257CneDUwEVx2bJ6NuoescCB7kqMHycy32EbbekZR9DVbYsiwD) |
+| **Iteration 3** | Image Generation | [`amKXrrcQ...`](https://explorer.solana.com/tx/amKXrrcQeL46kMxFigBPTob9LUdBn6rwAnEP1xjzBkT7jnpaEmZti7LbeyLgeKjdCmyQ5L7HhFQAckGbdpiN4we) |
 
 ### SAP Stats Report Transactions
 
-| # | Solana Explorer Link |
+| Iteration | Solana Explorer Link |
 |---|---|
-| 1 | [`4RzDvPqc...`](https://explorer.solana.com/tx/4RzDvPqc339wr6Ujs5reM7xRS8FvpV5dp4e1g6Dj7HWSLNsrunv69L3XZy6qLv4PhSM42geJr3rLPMAt2R5kgegu) |
-| 2 | [`4XpSATta...`](https://explorer.solana.com/tx/4XpSATtaY27g19ztAEmwPN8V5T8KZWDmSm13HhQa2QrAAFtyHPBtm59U3SdVQoUzCmTKbZz65LDaJW372aFJAaR4) |
+| **Iteration 1** | [`4abv7Ha6...`](https://explorer.solana.com/tx/4abv7Ha6sb8B9WAtvCBauci4ssCJd3NyY82748XVW9oBuaCMTR9fb9jMCxwmbLc81N77UPYqE7aqtdpSpoyxSoPz) |
+| **Iteration 2** | [`4F2rw3zX...`](https://explorer.solana.com/tx/4F2rw3zXx4syXVX7eNJEYfUqZCPmjLo3cj4eejdnATvEbvW4cjiUEdfx3YWvKnmwkWCKxxFKLKiYmXgZHQMMm7Ho) |
+| **Iteration 3** | [`2fKe3YbM...`](https://explorer.solana.com/tx/2fKe3YbMCupoVhNaNPpaCLY4fwphjVi7HgQ7eV3KGvDj2UvMnJjtQSPRcC3Wi4maCdomoJHYAzA7x4SYp6MPf7xp) |

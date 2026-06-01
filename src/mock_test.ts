@@ -37,7 +37,11 @@ const mockClient: any = {
     generate: async (params: any) => {
       console.log(`[Mock Image Generator] Simulating image generation for prompt: "${params.prompt}"`);
       return {
-        url: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=600&q=80'
+        data: [
+          {
+            image_url: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=600&q=80'
+          }
+        ]
       };
     }
   }

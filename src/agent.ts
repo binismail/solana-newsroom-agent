@@ -20,7 +20,7 @@ const anchorPkg = require('@coral-xyz/anchor');
 const { Wallet, BN } = anchorPkg;
 const sapTypesPkg = require('@oobe-protocol-labs/synapse-sap-sdk/types');
 const { TokenType, SettlementMode } = sapTypesPkg;
-import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
+import { Connection, LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
 
 // Setup Sleep helper
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -46,8 +46,34 @@ async function main() {
 
   console.log(`[SAP Identity] Checking registration for agent PDA: ${agentPda.toBase58()}...`);
 
+  // Use a fallback connection and client for account reads in case the primary RPC proxy has issues
+  const fallbackConnection = new Connection('https://api.mainnet-beta.solana.com', 'confirmed');
+  const fallbackSapClient = new SapClient({
+    connection: fallbackConnection,
+    wallet: anchorWallet,
+    programId: sapProgramId,
+  });
+  
+  let agentRegistered = false;
+
   try {
-    const existingAgent = await sapClient.fetchAccount('agentAccount', agentPda);
+    // Try primary RPC first
+    let existingAgent: any = null;
+    try {
+      existingAgent = await sapClient.fetchAccount('agentAccount', agentPda);
+    } catch (fetchErr: any) {
+      console.warn(`[SAP Identity] Primary RPC fetch failed (${fetchErr.message}).`);
+    }
+
+    // If primary returned null or threw, try fallback RPC
+    if (!existingAgent) {
+      console.log(`[SAP Identity] Agent account not found via primary RPC. Fetching via fallback RPC...`);
+      try {
+        existingAgent = await fallbackSapClient.fetchAccount('agentAccount', agentPda);
+      } catch (fbErr: any) {
+        console.warn(`[SAP Identity] Fallback fetch also failed: ${fbErr.message}`);
+      }
+    }
     
     if (existingAgent) {
       console.log(`[SAP Identity] Agent already registered on-chain!`);
@@ -55,6 +81,7 @@ async function main() {
       console.log(`  - Description: "${existingAgent.description}"`);
       console.log(`  - Active: ${existingAgent.isActive}`);
       console.log(`  - Total Calls Served: ${existingAgent.totalCallsServed.toString()}`);
+      agentRegistered = true;
     } else {
       console.log(`[SAP Identity] Agent account NOT found on-chain. Registering new agent identity...`);
       
@@ -124,7 +151,7 @@ async function main() {
       const tx = await sapClient.buildTransaction([registerIx], keypair.publicKey);
       tx.sign([keypair]);
       const signature = await connection.sendRawTransaction(tx.serialize(), {
-        skipPreflight: false,
+        skipPreflight: true,
         preflightCommitment: 'confirmed'
       });
       
@@ -134,12 +161,25 @@ async function main() {
       // Sleep a bit for network finality
       await sleep(5000);
       console.log(`[SAP Identity] Agent successfully registered!`);
+      agentRegistered = true;
     }
   } catch (err: any) {
     console.error(`[SAP Identity] Failed to handle SAP identity setup: ${err.message}`);
     console.error(err.stack);
-    console.error(`[SAP Identity] Critical error: Agent on-chain identity setup failed. Terminating to prevent un-indexed execution.`);
-    process.exit(1);
+    
+    // Last resort: check fallback RPC if the agent was already registered previously
+    try {
+      const fallbackInfo = await fallbackConnection.getAccountInfo(agentPda);
+      if (fallbackInfo && fallbackInfo.data.length > 0) {
+        console.log(`[SAP Identity] Agent confirmed on-chain via fallback RPC — continuing execution.`);
+        agentRegistered = true;
+      }
+    } catch (_) {}
+    
+    if (!agentRegistered) {
+      console.error(`[SAP Identity] Critical error: Agent on-chain identity setup failed. Terminating to prevent un-indexed execution.`);
+      process.exit(1);
+    }
   }
 
   // 2. Initialize Ace Data Cloud Client with X402 Payment Interceptor
@@ -171,7 +211,22 @@ async function main() {
       // Step 0: Tool Discovery & Selection via SAP
       console.log(`\n[Pipeline] Step 0: Discovering tools via Synapse Agent Protocol (SAP)...`);
       try {
-        const agentAccount = await sapClient.fetchAccount('agentAccount', agentPda);
+        let agentAccount: any = null;
+        try {
+          agentAccount = await sapClient.fetchAccount('agentAccount', agentPda);
+        } catch (fetchErr: any) {
+          console.warn(`[SAP Discovery] Primary RPC fetch failed: ${fetchErr.message}`);
+        }
+
+        if (!agentAccount) {
+          console.log(`[SAP Discovery] Fetching agent account via fallback RPC...`);
+          try {
+            agentAccount = await fallbackSapClient.fetchAccount('agentAccount', agentPda);
+          } catch (fbErr: any) {
+            console.warn(`[SAP Discovery] Fallback RPC fetch also failed: ${fbErr.message}`);
+          }
+        }
+
         if (agentAccount) {
           console.log(`[SAP Discovery] Successfully fetched agent metadata from on-chain PDA: ${agentPda.toBase58()}`);
           console.log(`[SAP Discovery] Registered Capabilities:`);
@@ -240,7 +295,7 @@ async function main() {
         const tx = await sapClient.buildTransaction([reportIx], keypair.publicKey);
         tx.sign([keypair]);
         const signature = await connection.sendRawTransaction(tx.serialize(), {
-          skipPreflight: false,
+          skipPreflight: true,
           preflightCommitment: 'confirmed'
         });
         console.log(`[SAP Stats] Calls served successfully updated on-chain! Signature: ${signature}`);

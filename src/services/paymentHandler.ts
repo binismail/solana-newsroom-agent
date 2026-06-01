@@ -1,4 +1,4 @@
-import { Connection, Keypair, PublicKey, sendAndConfirmTransaction, Transaction } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey, Transaction } from '@solana/web3.js';
 import { createX402PaymentHandler, SolanaWalletAdapter } from '@acedatacloud/x402-client';
 
 /**
@@ -51,8 +51,20 @@ export class KeypairWalletAdapter implements SolanaWalletAdapter {
         console.log(`[X402 INTERCEPTOR] Source Token Account: ${sourceATA.toBase58()}`);
         console.log(`[X402 INTERCEPTOR] Destination Token Account: ${destinationATA.toBase58()}`);
 
-        // Check if destination token account exists on-chain
-        const destAccountInfo = await this.connection.getAccountInfo(destinationATA);
+        // Check if destination token account exists on-chain with fallback
+        let destAccountInfo = null;
+        try {
+          destAccountInfo = await this.connection.getAccountInfo(destinationATA);
+        } catch (err: any) {
+          console.warn(`[X402 INTERCEPTOR] Primary RPC getAccountInfo failed (${err.message}). Trying fallback mainnet RPC...`);
+          try {
+            const fallbackConnection = new Connection('https://api.mainnet-beta.solana.com', 'confirmed');
+            destAccountInfo = await fallbackConnection.getAccountInfo(destinationATA);
+          } catch (fbErr: any) {
+            console.warn(`[X402 INTERCEPTOR] Fallback RPC getAccountInfo failed: ${fbErr.message}`);
+          }
+        }
+
         if (destAccountInfo === null) {
           console.log(`[X402 INTERCEPTOR] Destination token account ${destinationATA.toBase58()} does NOT exist on-chain.`);
           
@@ -81,10 +93,43 @@ export class KeypairWalletAdapter implements SolanaWalletAdapter {
     console.log('[X402 INTERCEPTOR] Signing transaction locally...');
     tx.partialSign(this.keypair);
 
-    console.log('[X402 INTERCEPTOR] Submitting and confirming transaction on-chain...');
-    const signature = await sendAndConfirmTransaction(this.connection, tx, [this.keypair], {
-      commitment: 'confirmed',
+    console.log('[X402 INTERCEPTOR] Submitting transaction on-chain...');
+    const signature = await this.connection.sendRawTransaction(tx.serialize(), {
+      skipPreflight: true,
+      preflightCommitment: 'confirmed',
     });
+
+    console.log(`[X402 INTERCEPTOR] Transaction submitted! Signature: ${signature}`);
+    console.log('[X402 INTERCEPTOR] Polling for confirmation via HTTP...');
+
+    let confirmed = false;
+    const start = Date.now();
+    const timeout = 60000; // 60 seconds
+    while (Date.now() - start < timeout) {
+      try {
+        const response = await this.connection.getSignatureStatus(signature);
+        if (response && response.value) {
+          if (response.value.err) {
+            throw new Error(`Transaction failed on-chain: ${JSON.stringify(response.value.err)}`);
+          }
+          const confStatus = response.value.confirmationStatus;
+          if (confStatus === 'confirmed' || confStatus === 'finalized') {
+            confirmed = true;
+            break;
+          }
+        }
+      } catch (err: any) {
+        console.warn(`[X402 INTERCEPTOR] Confirmation check warning: ${err.message}`);
+        if (err.message.includes('Transaction failed on-chain')) {
+          throw err;
+        }
+      }
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+
+    if (!confirmed) {
+      throw new Error(`X402 transaction ${signature} failed to confirm within 60s.`);
+    }
 
     console.log(`[X402 INTERCEPTOR] Payment SETTLED! Signature: ${signature}`);
     console.log('[X402 INTERCEPTOR] ========================================\n');
